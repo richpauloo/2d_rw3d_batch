@@ -31,9 +31,9 @@ optimum_dt
 
 T
 Eulerian
-slice_4.cbb   	86400.0		0 	2 
-slice_4.cbb   	86400.0		0 	2 
-slice_4.cbb   	86400.0		0 	2 
+C:/Users/rpauloo/Documents/GitHub/2d_rw3d_batch/input/cbb/slice_4.cbb   	86400.0		0 	2 
+C:/Users/rpauloo/Documents/GitHub/2d_rw3d_batch/input/cbb/slice_4.cbb   	86400.0		0 	2 
+C:/Users/rpauloo/Documents/GitHub/2d_rw3d_batch/input/cbb/slice_4.cbb   	86400.0		0 	2 
 not_used     		0.3 	1 	0 
 1
 100000.0000000  1  1.0000  SS
