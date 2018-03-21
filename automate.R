@@ -1,3 +1,7 @@
+###############################################################################
+# The following lines of code don't need to be run, except for the libraries used
+###############################################################################
+
 
 # install.packages("here")
 # install.packages("tidyverse")
@@ -34,11 +38,17 @@ for(i in 1:63){
 file.copy(temp, here("input","cbb"))
 
 
+################################################################################
+# Run the following lines of code to create system-specific model runs
+################################################################################
+
+
+
 # make input files
 inp <- read_lines(here("input","rw3d_1_d1_r2.inp"))
 
 for(i in 1:63){
-  lines <- inp  %>% str_replace("slice_1", paste0("slice_", i)) 
+  lines <- inp  %>% str_replace("slice_1", here("input", "cbb", paste0("slice_", i))) 
   write_lines(lines, here("input", "inp", paste0("slice_", i, ".inp")))
 }
 
