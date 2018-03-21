@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\n\n# some useful functions\ndir(\"C:/Users/rpauloo/Desktop/temp_gwv_files\") # like list.files(). lists all file names in directory\n\ndir.exists(\"C:/Users/rpauloo/Desktop/temjhfdsap\") # T/F test if directory exisits\n\ndirname(\"C:/Users/rpauloo/Desktop/temp\") # removes a level of hierarchy\n\ndir.create(\"C:/Users/rpauloo/Desktop/temp_gwv_files/foo\") # create a new directory\n\n\n# create directories for all 63 model runs\n\nfor(i in 1:63){\n  dir.create(paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i))\n}\n\n\n# NAME (.nam) file\nnam <- read_lines(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/functioning_model/gv9.nam\")\n\nfor(i in 1:63){\n  lines <- nam %>% str_replace(\"gv9\", paste0(\"slice_\", i)) %>% \n                   str_replace(\"chd_slice_1\", paste0(\"slice_\", i)) %>% \n                   str_replace(\"gv25\", paste0(\"slice_\",i))\n  \n  write_lines(lines, paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i, \"/slice_\", i, \".nam\"))\n}\n\n\n# BASIC (.bas) file\nbas <- read_lines(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/functioning_model/gv9.bas\")\n\nfor(i in 1:63){\n  write_lines(bas, paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i, \"/slice_\", i, \".bas\"))\n}\n\n\n# DISCRETIZATION (.dis) file\ndis <- read_lines(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/functioning_model/gv9.dis\")\n\nfor(i in 1:63){\n  write_lines(dis, paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i, \"/slice_\", i, \".dis\"))\n}\n\n\n# CONSTANT HEAD (.chd) file\n# use `code/modflow/boundary_conditions/ghb_chd.Rmd`\n\n\n# OUTPUT CONTROL (.oc) file\noc <- read_lines(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/functioning_model/gv9.oc\")\n\nfor(i in 1:63){\n  write_lines(oc, paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i, \"/slice_\", i, \".oc\"))\n}\n\n\n# GEOMETRIC MULTIGRID SOLVER (.gmg) file\ngmg <- read_lines(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/functioning_model/gv25.gmg\")\n\nfor(i in 1:63){\n  write_lines(gmg, paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i, \"/slice_\", i, \".gmg\"))\n}\n\n# LFP and ZONE in GWV\n# difficult to automate because of air cells\n# did manually with GWV -- took ~3.5 hours\n# augment THIS file to change K fields down the line....\n\n\n# make directories for each gwv run\nmake_dir <- function(x) {  \n  dir.create(paste0(\"C:/Users/rpauloo/Desktop/temp_gwv_files/ftp_zone_creation/\", x)) # create a new directory\n}\n\nlapply(1:63, make_dir)\n\n\n\n# Run MODFLOW from cmd line\n\nfor(i in 1:63){\n  cmd_name <- paste0(\"C:/Users/rpauloo/Documents/GitHub/kings-river-fan-tprogs/code/modflow/automate_modflow/slice_\", i, \"/MF2k.exe\")\n  name_file <- paste0(\"slice_\", i, \".nam\")\n  setwd(dirname(cmd_name))\n  system2(cmd_name, args = name_file)\n}\n\n\n\n\n\n\n\n\n",
+    "created" : 1521659113609.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "90728083",
+    "id" : "500BF9E9",
+    "lastKnownWriteTime" : 1518728509,
+    "last_content_update" : 1518728509,
+    "path" : "~/GitHub/kings-river-fan-tprogs/code/modflow/2d_model_automate/create_directories_and_files.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

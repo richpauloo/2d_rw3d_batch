@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# install.packages(\"here\")\n# install.packages(\"tidyverse\")\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(stringr)\n\n# delete unnecessary files\nfor(i in 1:63){\n  unlink(here(paste0(\"slice_\", i), \"MF2K.exe\"))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".bas\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".bas\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".chd\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".ddn\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".dis\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".glo\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".gmg\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".hds\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".lpf\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".lst\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".nam\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".oc\")))\n  unlink(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".zone\")))\n}\n\n# copy .cbb files into input\ntemp <- vector(length = 63)\nfor(i in 1:63){\n  temp[i] = normalizePath(here(paste0(\"slice_\", i), paste0(\"slice_\", i, \".cbb\")))\n}\n\n# copy all files into input/cbb\nfile.copy(temp, here(\"input\",\"cbb\"))\n\n\n# make input files\ninp <- read_lines(here(\"input\",\"rw3d_1_d1_r2.inp\"))\n\nfor(i in 1:63){\n  lines <- inp  %>% str_replace(\"slice_1\", paste0(\"slice_\", i)) \n  write_lines(lines, here(\"input\", \"inp\", paste0(\"slice_\", i, \".inp\")))\n}\n\n\n# make name files write files to new directories\nother <- here(\"output\",\"other\")\nbtc <- here(\"output\",\"btc\")\ncbtc <- here(\"output\",\"cbtc\")\npart_evol <- here(\"output\",\"part_evol\")\n\nnam <- read_lines(here(\"input\",\"rw3d_1_d1_r2.nam\"))\n\nfor(i in 1:63){\n  lines <- nam %>% str_replace(\"rw3d_1_d1_r2\", paste0(\"slice_\", i)) %>% \n    str_replace(\"1_d1_r2\", paste0(\"_slice_\", i)) %>% \n    str_replace(\"rw3d\", paste0(\"slice_\",i,\"_rw3d\"))\n  \n  lines[1] <- here(\"input\", \"inp\", paste0(\"slice_\", i, \".inp\")) # name file\n  lines[2] <- paste0(btc, \"/\", lines[2]) # btc\n  lines[3] <- paste0(cbtc, \"/\", lines[3]) # cbtc\n  lines[4] <- paste0(part_evol, \"/\", lines[4]) # part_evol\n  lines[c(5:17)] <- paste0(other, \"/\", lines[4]) # other\n  \n  write_lines(lines, here(\"input\", \"nam\", paste0(\"slice_\", i, \".nam\")))\n}\n\n\n# run all slices \n\nfor(i in 1:63){\n  cmd_name <- here(\"RW3D.exe\")\n  name_file <- here(\"input\", \"nam\", paste0(\"slice_\", i, \".nam\"))\n  system2(cmd_name, args = name_file)\n}\n\n",
+    "created" : 1521658917545.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2757520602",
+    "id" : "A46D3445",
+    "lastKnownWriteTime" : 1521663035,
+    "last_content_update" : 1521663035365,
+    "path" : "~/GitHub/2d_rw3d_batch/automate.R",
+    "project_path" : "automate.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

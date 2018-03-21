@@ -1,0 +1,125 @@
+
+
+
+
+
+
+
+
+
+0
+1   0
+A
+
+100000.0
+
+
+
+1    75    201
+not_used 			200.0 	1 	0
+not_used 			200.0 	1 	0
+not_used 			0.5 	1 	0
+not_used 			1.0		1	0
+0 0 0 0 0 0
+
+
+
+optimum_dt
+0.1  0.2  0.2  0.1  0.1  0.1
+
+
+
+T
+Eulerian
+slice_61.cbb   	86400.0		0 	2 
+slice_61.cbb   	86400.0		0 	2 
+slice_61.cbb   	86400.0		0 	2 
+not_used     		0.3 	1 	0 
+1
+100000.0000000  1  1.0000  SS
+F
+
+
+
+T
+not_used       		2.0     1 	0
+not_used       		2.0		1 	0
+not_used       		0.05 	1 	0
+not_used       		0.0 	1 	0
+not_used       		0.0 	1 	0
+not_used       		0.0 	1 	0
+1.0  1.0  1.0  1.0  1.0
+1.0  1.0  1.0  1.0  1.0
+
+
+
+F
+spherical_diffusion
+10
+not_used			0.037	1	0
+not_used			0.3		1	0
+
+
+
+
+
+F
+linear
+not_used 			2.9		1	0
+not_used 			13.08	1	0
+
+
+
+F
+1
+B
+serial
+not_used 			0.0042	1	0
+not_used 			0.00	1	0
+not_used 			0.0042	1	0
+
+
+
+F
+0   0
+
+
+
+0
+mnw2_package
+not_used
+1
+0.0  ZZ  1
+
+
+
+1
+WATER_TABLE_FLUX_WEIGHTED    DIRAC
+1.0  0  1
+0.0  0.0  200.0  15000.0  10.0
+0
+100000
+
+
+
+F
+2
+[ D1 AND D3 AND D5 AND D7 AND D9 AND D11 AND D13 AND D15 --> D2 AND D4 AND D6 AND D8 AND D10 AND D12 AND D14 ]
+recircul_tf_odd.dat  	1.0
+[ D2 AND D4 AND D6 AND D8 AND D10 AND D12 AND D14 --> D1 AND D3 AND D5 AND D7 AND D9 AND D11 AND D13 AND D15 ]
+recircul_tf_even.dat  	1.0
+
+
+
+
+  0
+  1
+  1000000.0   100   1.0
+
+  0
+  1    100   plugin   -10.   0. 100000.
+  1    	1
+  0    	1	-2
+
+
+
