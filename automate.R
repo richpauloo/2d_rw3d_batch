@@ -5,6 +5,7 @@
 
 # install.packages("here")
 # install.packages("tidyverse")
+# install.packages("stringr")
 
 library(here)
 library(tidyverse)
@@ -83,4 +84,5 @@ for(i in 1:63){
   name_file <- here("input", "nam", paste0("slice_", i, ".nam"))
   system2(cmd_name, args = name_file)
 }
+
 
