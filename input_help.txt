@@ -1,0 +1,10 @@
+time: 
+	line 14, element 1
+	line 39, element 1
+	line 120, element 6
+	
+number of particles:
+	line 101, element 1
+
+number of snapshots:
+	line 117, element 2
